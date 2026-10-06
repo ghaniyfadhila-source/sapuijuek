@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-brand: #2563eb;
   --color-brand-dark: #1d4ed8;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -10,6 +10,35 @@ body {
   background: #f8fafc;
   color: #0f172a;
   font-family: var(--font-sans);
+}
+
+/* Class brand polos — sengaja tidak pakai @theme Tailwind karena build Vercel
+   tidak memproses @theme (utility brand hilang dari CSS produksi).
+   ponytail: jika build Vercel sudah memproses @theme dengan benar, class di
+   bawah bisa dihapus dan Tailwind dipakai lagi via @theme. */
+.text-brand {
+  color: var(--color-brand);
+}
+.text-brand-dark {
+  color: var(--color-brand-dark);
+}
+.hover\:text-brand:hover {
+  color: var(--color-brand);
+}
+.hover\:text-brand-dark:hover {
+  color: var(--color-brand-dark);
+}
+.bg-brand {
+  background-color: var(--color-brand);
+}
+.bg-brand-dark {
+  background-color: var(--color-brand-dark);
+}
+.hover\:bg-brand:hover {
+  background-color: var(--color-brand);
+}
+.hover\:bg-brand-dark:hover {
+  background-color: var(--color-brand-dark);
 }
 
 /* Efek glassmorphism kelas (PRD 5.1/5.2) */
