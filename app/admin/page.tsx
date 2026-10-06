@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/placeholder-page";
 
-export const metadata: Metadata = { title: "Admin" };
+export const metadata: Metadata = { title: "Dashboard Admin" };
 
-export default function AdminPage() {
+export default function AdminDashboardPage() {
   return (
-    <PlaceholderPage
-      title="Panel Admin"
-      description="Area khusus anggota kelas untuk mengelola seluruh konten website. Login admin menyusul."
-    />
+    <div className="glass rounded-2xl p-10 text-center">
+      <h1 className="text-3xl font-bold">Dashboard Admin</h1>
+      <p className="mt-3 text-slate-600">
+        Selamat datang. Statistik dan ringkasan konten akan tampil di sini
+        setelah modul konten (prestasi, portfolio, kegiatan) selesai dibangun.
+      </p>
+    </div>
   );
 }
