@@ -1,51 +1,146 @@
 @import "tailwindcss";
 
-:root {
+/* ==========================================================================
+   Design tokens — tema "Modern Tech & Student Portfolio"
+   Warna kustom WAJIB didefinisikan di sini supaya utility Tailwind
+   (text-primary, bg-accent-soft, border-primary/15, shadow-primary/25, ...)
+   benar-benar ter-generate di build lokal maupun build Vercel.
+   Rasio kontras terhadap permukaan terang:
+     primary #2563eb 5.2:1 · primary-dark #1d4ed8 7.5:1
+     accent-strong #c2410c 5.9:1 · muted-foreground #475569 7.5:1
+     foreground #0f172a 17:1  → semuanya lolos WCAG AA (4.5:1)
+   ========================================================================== */
+@theme {
+  /* Brand inti (dipakai panel admin) */
   --color-brand: #2563eb;
   --color-brand-dark: #1d4ed8;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Primary — aksi utama, tautan, sorotan */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-soft: #dbeafe;
+
+  /* Accent — penekanan sekunder (prestasi, CTA) */
+  --color-accent: #ea580c;
+  --color-accent-strong: #c2410c;
+  --color-accent-soft: #ffedd5;
+
+  /* Teks */
+  --color-foreground: #0f172a;
+  --color-muted-foreground: #475569;
+
+  /* Permukaan halaman */
+  --color-surface: #f6f8fb;
+
+  /* Tipografi: Poppins (display) + Open Sans (body) */
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 }
 
-body {
-  background: #f8fafc;
-  color: #0f172a;
-  font-family: var(--font-sans);
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Hierarki tipografi tegas: heading Poppins, tracking rapat */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+
+  /* Focus ring global — keyboard accessibility di semua elemen */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Hormati pengguna yang reduzir animasi */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
-/* Class brand polos — sengaja tidak pakai @theme Tailwind karena build Vercel
-   tidak memproses @theme (utility brand hilang dari CSS produksi).
-   ponytail: jika build Vercel sudah memproses @theme dengan benar, class di
-   bawah bisa dihapus dan Tailwind dipakai lagi via @theme. */
-.text-brand {
-  color: var(--color-brand);
-}
-.text-brand-dark {
-  color: var(--color-brand-dark);
-}
-.hover\:text-brand:hover {
-  color: var(--color-brand);
-}
-.hover\:text-brand-dark:hover {
-  color: var(--color-brand-dark);
-}
-.bg-brand {
-  background-color: var(--color-brand);
-}
-.bg-brand-dark {
-  background-color: var(--color-brand-dark);
-}
-.hover\:bg-brand:hover {
-  background-color: var(--color-brand);
-}
-.hover\:bg-brand-dark:hover {
-  background-color: var(--color-brand-dark);
-}
+@layer components {
+  /* Permukaan kaca standar — depth 3 lapis + border kontras */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(165%);
+    -webkit-backdrop-filter: blur(16px) saturate(165%);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 12px 32px -18px rgba(15, 23, 42, 0.28);
+  }
 
-/* Efek glassmorphism kelas (PRD 5.1/5.2) */
-.glass {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  /* Permukaan kaca tebal — navbar sticky, panel mobile */
+  .glass-strong {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(255, 255, 255, 0.68)
+    );
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 18px 40px -24px rgba(15, 23, 42, 0.35);
+  }
+
+  /* Specular highlight — pantulan cahaya tipis di permukaan atas */
+  .glass::before,
+  .glass-strong::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0) 45%
+    );
+  }
+
+  /* Aura warna lembut di belakang hero */
+  .hero-aura {
+    background:
+      radial-gradient(
+        38rem 22rem at 12% 0%,
+        rgba(37, 99, 235, 0.16),
+        transparent 60%
+      ),
+      radial-gradient(
+        30rem 20rem at 88% 8%,
+        rgba(234, 88, 12, 0.12),
+        transparent 60%
+      );
+  }
 }

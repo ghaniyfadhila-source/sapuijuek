@@ -178,7 +178,7 @@ export default function AdminAnggotaPage() {
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && applySearch()}
           placeholder="Cari nama, NIS, atau kelas..."
-          className="w-full max-w-sm rounded-xl border border-slate-300 bg-white/80 px-4 py-2 text-sm outline-none focus:border-brand"
+          className="w-full max-w-sm rounded-xl border border-slate-300 bg-white/80 px-4 py-2 text-sm outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
         />
         <button
           onClick={applySearch}
@@ -298,7 +298,7 @@ export default function AdminAnggotaPage() {
                   required
                   value={form.nama}
                   onChange={(e) => setForm({ ...form, nama: e.target.value })}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus:border-brand"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
                 />
               </div>
               <div>
@@ -308,7 +308,7 @@ export default function AdminAnggotaPage() {
                   inputMode="numeric"
                   value={form.nis}
                   onChange={(e) => setForm({ ...form, nis: e.target.value })}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus:border-brand"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
                 />
               </div>
               <div>
@@ -318,7 +318,7 @@ export default function AdminAnggotaPage() {
                   value={form.kelas_paralel}
                   onChange={(e) => setForm({ ...form, kelas_paralel: e.target.value })}
                   placeholder="contoh: XI-PPLG-1"
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus:border-brand"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
                 />
               </div>
               <div>
@@ -327,7 +327,7 @@ export default function AdminAnggotaPage() {
                   value={form.kontak}
                   onChange={(e) => setForm({ ...form, kontak: e.target.value })}
                   placeholder="WA / email"
-                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus:border-brand"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
                 />
               </div>
               <div>

@@ -64,7 +64,7 @@ function LoginForm() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white/80 px-4 py-2.5 outline-none focus:border-brand"
+              className="w-full rounded-xl border border-slate-300 bg-white/80 px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@ function LoginForm() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white/80 px-4 py-2.5 outline-none focus:border-brand"
+              className="w-full rounded-xl border border-slate-300 bg-white/80 px-4 py-2.5 outline-none focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/35"
             />
           </div>
           {error && (
