@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { contactSearchSchema, contactUpdateSchema, type ContactMessage } from "@/lib/validation/contact";
+import { type ContactMessage } from "@/lib/validation/contact";
 
 const PER_PAGE = 20;
 

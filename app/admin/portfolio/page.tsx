@@ -53,7 +53,6 @@ export default function AdminPortfolioPage() {
   const [form, setForm] = useState<ProjectInput>(emptyForm);
   const [formError, setFormError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
 
   const totalPages = Math.max(1, Math.ceil(count / PER_PAGE));
 
@@ -122,7 +121,6 @@ export default function AdminPortfolioPage() {
     }
     setSaving(true);
     try {
-      let projectId: string;
       if (editing) {
         const res = await fetch(`/api/projects/${editing.id}`, {
           method: "PATCH",
@@ -131,7 +129,6 @@ export default function AdminPortfolioPage() {
         });
         const json = (await res.json().catch(() => null)) as { data?: Project; error?: string } | null;
         if (!res.ok || !json?.data) throw new Error(json?.error ?? "Gagal mengubah karya");
-        projectId = json.data.id;
         setNotice(`Karya "${parsed.data.judul}" diperbarui.`);
       } else {
         const res = await fetch("/api/projects", {
@@ -141,7 +138,6 @@ export default function AdminPortfolioPage() {
         });
         const json = (await res.json().catch(() => null)) as { data?: Project; error?: string } | null;
         if (!res.ok || !json?.data) throw new Error(json?.error ?? "Gagal menambah karya");
-        projectId = json.data.id;
         setNotice(`Karya "${parsed.data.judul}" ditambahkan.`);
       }
       setShowForm(false);
@@ -155,7 +151,6 @@ export default function AdminPortfolioPage() {
 
   async function handleImageUpload(projectId: string, files: FileList) {
     if (!files.length) return;
-    setUploading(true);
     try {
       const fd = new FormData();
       Array.from(files).forEach((f) => fd.append("files", f));
@@ -166,8 +161,6 @@ export default function AdminPortfolioPage() {
       load(page, q, jenis);
     } catch (err) {
       setFormError(err instanceof Error ? err.message : "Upload gagal");
-    } finally {
-      setUploading(false);
     }
   }
 

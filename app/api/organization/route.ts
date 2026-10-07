@@ -3,7 +3,6 @@ import { requireAdmin } from "@/lib/auth/verify";
 import { getAnonClient, getServiceClient } from "@/lib/supabase/db";
 import {
   organizationSchema,
-  sanitizeSearchTerm,
   searchQuerySchema,
   type Organization,
 } from "@/lib/validation/organization";
@@ -18,10 +17,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Parameter tidak valid" }, { status: 400 });
   }
   const { page, perPage } = params.data;
-  const term = sanitizeSearchTerm(params.data.q);
 
   const supabase = getAnonClient();
-  let query = supabase
+  const query = supabase
     .from("organization")
     .select("*, members!inner(nama, foto_url, kelas_paralel)", { count: "exact" })
     .order("urutan", { ascending: true })
@@ -34,7 +32,15 @@ export async function GET(req: NextRequest) {
   }
 
   // Flatten member data
-  const flattened = (data ?? []).map((row: any) => ({
+  type OrgRow = {
+    id: string;
+    posisi: string;
+    urutan: number;
+    member_id: string;
+    created_at: string;
+    members?: { nama: string; foto_url: string; kelas_paralel: string } | null;
+  };
+  const flattened = (data ?? []).map((row: OrgRow) => ({
     ...row,
     nama: row.members?.nama,
     foto_url: row.members?.foto_url,

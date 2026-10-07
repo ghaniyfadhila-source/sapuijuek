@@ -77,7 +77,7 @@ export default function AdminStrukturPage() {
     try {
       const res = await fetch("/api/members?perPage=100");
       if (!res.ok) throw new Error("Gagal memuat data anggota");
-      const json = (await res.json()) as { data: any[] };
+      const json = (await res.json()) as { data: { id: string; nama: string; nis: string; kelas_paralel: string; foto_url: string; kontak: string; created_at: string }[] };
       setMembers(json.data);
     } catch (err) {
       console.error("Load members failed:", err);
@@ -85,9 +85,13 @@ export default function AdminStrukturPage() {
   }, []);
 
   useEffect(() => {
-    loadMembers();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load(page, q);
+    let mounted = true;
+    async function fetchInitialData() {
+      await loadMembers();
+      if (mounted) await load(page, q);
+    }
+    fetchInitialData();
+    return () => { mounted = false; };
   }, [page, q, load, loadMembers]);
 
   function applySearch() {

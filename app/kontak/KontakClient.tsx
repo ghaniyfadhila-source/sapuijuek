@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Mail, MessageSquare, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, Phone, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 type FormData = {
   nama: string;

@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  settingsSchema,
-  type SettingsInput,
-} from "@/lib/validation/siteSettings";
+import { type SettingsInput } from "@/lib/validation/siteSettings";
 
 const initialForm: SettingsInput = {
   tagline: "",

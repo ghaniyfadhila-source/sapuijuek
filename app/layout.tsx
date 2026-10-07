@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
+import { Open_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+
+// Font pairing dari ui-ux-pro-max: Poppins (heading) + Open Sans (body)
+const heading = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const body = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -14,10 +29,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="id">
+    <html lang="id" className={`${heading.variable} ${body.variable}`}>
       <body className="flex min-h-screen flex-col">
+        <a
+          href="#konten"
+          className="sr-only rounded-xl bg-primary px-4 py-2 font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
+        >
+          Lewati ke konten utama
+        </a>
         <SiteNavbar />
-        <div className="flex-1">{children}</div>
+        <div id="konten" className="flex-1">
+          {children}
+        </div>
         <SiteFooter />
       </body>
     </html>

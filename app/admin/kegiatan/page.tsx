@@ -39,7 +39,6 @@ export default function AdminKegiatanPage() {
   const [form, setForm] = useState<ActivityInput>(emptyForm);
   const [formError, setFormError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
 
   const totalPages = Math.max(1, Math.ceil(count / PER_PAGE));
 
@@ -99,7 +98,6 @@ export default function AdminKegiatanPage() {
     }
     setSaving(true);
     try {
-      let activityId: string;
       if (editing) {
         const res = await fetch(`/api/activities/${editing.id}`, {
           method: "PATCH",
@@ -108,7 +106,6 @@ export default function AdminKegiatanPage() {
         });
         const json = (await res.json().catch(() => null)) as { data?: Activity; error?: string } | null;
         if (!res.ok || !json?.data) throw new Error(json?.error ?? "Gagal mengubah kegiatan");
-        activityId = json.data.id;
         setNotice(`Kegiatan "${parsed.data.nama_acara}" diperbarui.`);
       } else {
         const res = await fetch("/api/activities", {
@@ -118,7 +115,6 @@ export default function AdminKegiatanPage() {
         });
         const json = (await res.json().catch(() => null)) as { data?: Activity; error?: string } | null;
         if (!res.ok || !json?.data) throw new Error(json?.error ?? "Gagal menambah kegiatan");
-        activityId = json.data.id;
         setNotice(`Kegiatan "${parsed.data.nama_acara}" ditambahkan.`);
       }
       setShowForm(false);
@@ -132,7 +128,6 @@ export default function AdminKegiatanPage() {
 
   async function handlePhotoUpload(activityId: string, files: FileList) {
     if (!files.length) return;
-    setUploading(true);
     try {
       const fd = new FormData();
       Array.from(files).forEach((f) => fd.append("files", f));
@@ -143,8 +138,6 @@ export default function AdminKegiatanPage() {
       load(page, q);
     } catch (err) {
       setFormError(err instanceof Error ? err.message : "Upload gagal");
-    } finally {
-      setUploading(false);
     }
   }
 

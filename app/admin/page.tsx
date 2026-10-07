@@ -33,14 +33,20 @@ export default function AdminDashboardPage() {
           fetch("/api/projects?perPage=1").then((r) => r.json()),
           fetch("/api/activities?perPage=1").then((r) => r.json()),
           fetch("/api/admin/contact?perPage=1").then((r) => r.json()),
-        ]);
+        ]) as [
+          { count?: number; data?: unknown[] },
+          { count?: number; data?: unknown[] },
+          { count?: number; data?: unknown[] },
+          { count?: number; data?: unknown[] },
+          { count?: number; data?: { status: string }[] },
+        ];
         setStats({
           members: m.count ?? 0,
           achievements: a.count ?? 0,
           projects: p.count ?? 0,
           activities: act.count ?? 0,
           contacts: c.count ?? 0,
-          newContacts: c.data?.filter((x: any) => x.status === "baru").length ?? 0,
+          newContacts: c.data?.filter((x: { status: string }) => x.status === "baru").length ?? 0,
         });
       } catch {
         // ignore

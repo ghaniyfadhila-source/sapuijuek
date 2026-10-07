@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X, Maximize } from "lucide-react";
 
@@ -24,6 +24,17 @@ export default function KegiatanClient({ initialActivities, tagline }: Props) {
   const [currentActivityIdx, setCurrentActivityIdx] = useState(0);
   const [currentPhotoIdx, setCurrentPhotoIdx] = useState(0);
 
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxOpen]);
+
   function formatDate(dateStr: string) {
     try {
       return new Date(dateStr).toLocaleDateString("id-ID", {
@@ -40,12 +51,10 @@ export default function KegiatanClient({ initialActivities, tagline }: Props) {
     setCurrentActivityIdx(activityIdx);
     setCurrentPhotoIdx(photoIdx);
     setLightboxOpen(true);
-    document.body.style.overflow = "hidden";
   }
 
   function closeLightbox() {
     setLightboxOpen(false);
-    document.body.style.overflow = "";
   }
 
   function nextPhoto() {

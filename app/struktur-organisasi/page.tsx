@@ -26,7 +26,15 @@ export default async function StrukturPage() {
   const tagline = settings.get("struktur_tagline") || "Pengurus Kelas PPLG";
 
   // Flatten
-  const orgList: Organization[] = ((org ?? []) as any[]).map((row) => ({
+  type OrgRow = {
+    id: string;
+    posisi: string;
+    urutan: number;
+    member_id: string;
+    created_at: string;
+    members?: { nama: string; foto_url: string; kelas_paralel: string } | null;
+  };
+  const orgList: Organization[] = ((org ?? []) as OrgRow[]).map((row) => ({
     ...row,
     nama: row.members?.nama,
     foto_url: row.members?.foto_url,
