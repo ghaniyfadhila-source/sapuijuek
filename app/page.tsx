@@ -5,7 +5,6 @@ import {
   CodeXml,
   FolderKanban,
   Gamepad2,
-  LogIn,
   MonitorSmartphone,
   Trophy,
   Users,
@@ -198,30 +197,6 @@ export default function HomePage() {
             title="Belum ada karya"
             text="Karya siswa dikelola melalui panel admin."
           />
-        </div>
-      </section>
-
-      {/* CTA admin */}
-      <section className="mx-auto mt-20 max-w-6xl px-4">
-        <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary-dark to-blue-800 px-6 py-10 text-white shadow-xl shadow-primary/20 sm:px-10 sm:py-12">
-          <div aria-hidden className="absolute -right-16 -top-16 size-64 rounded-full bg-accent/30 blur-3xl" />
-          <div aria-hidden className="absolute -bottom-24 -left-10 size-64 rounded-full bg-white/10 blur-3xl" />
-          <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Anggota kelas PPLG?</h2>
-              <p className="mt-2 max-w-xl text-blue-100 text-pretty">
-                Masuk ke panel admin untuk memperbarui prestasi, karya, dan
-                dokumentasi kegiatan kelas.
-              </p>
-            </div>
-            <Link
-              href="/admin"
-              className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-xl bg-white px-6 font-semibold text-primary-dark shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-0 motion-reduce:transform-none"
-            >
-              <LogIn className="size-4" aria-hidden />
-              Masuk Admin
-            </Link>
-          </div>
         </div>
       </section>
     </main>

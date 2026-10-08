@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavLinks } from "@/components/nav-links";
+import { NavAuthButton } from "@/components/nav-auth-button";
 
 export function SiteNavbar() {
   return (
@@ -21,7 +22,10 @@ export function SiteNavbar() {
             Sapu Ijuek
           </span>
         </Link>
-        <NavLinks />
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <NavLinks />
+          <NavAuthButton />
+        </div>
       </nav>
     </header>
   );
