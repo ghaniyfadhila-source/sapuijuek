@@ -20,8 +20,8 @@ const body = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kelas PPLG SMKN 9 Semarang",
-    template: "%s | Kelas PPLG SMKN 9 Semarang",
+    default: "Sapu Ijuek",
+    template: "%s | Sapu Ijuek",
   },
   description:
     "Portal digital kelas PPLG (Pengembangan Perangkat Lunak dan Gim) SMKN 9 Semarang — profil kelas, prestasi, portofolio karya, dan dokumentasi kegiatan.",

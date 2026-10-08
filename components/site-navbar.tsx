@@ -18,10 +18,7 @@ export function SiteNavbar() {
             className="rounded-lg ring-1 ring-white/25"
           />
           <span className="font-display text-sm font-semibold leading-tight text-white sm:text-base">
-            Kelas PPLG
-            <span className="block text-xs font-medium text-slate-300 sm:inline sm:text-base sm:font-semibold sm:text-white">
-              <span className="hidden sm:inline"> </span>SMKN 9 Semarang
-            </span>
+            Sapu Ijuek
           </span>
         </Link>
         <NavLinks />
