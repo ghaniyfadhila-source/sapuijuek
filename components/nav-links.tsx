@@ -27,8 +27,8 @@ export function NavLinks() {
                 aria-current={active ? "page" : undefined}
                 className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   active
-                    ? "bg-primary-soft text-primary-dark"
-                    : "text-muted-foreground hover:bg-slate-900/5 hover:text-foreground"
+                    ? "bg-white/20 text-white"
+                    : "text-slate-200 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {l.label}
@@ -45,7 +45,7 @@ export function NavLinks() {
         aria-expanded={open}
         aria-controls="menu-mobile"
         aria-label={open ? "Tutup menu navigasi" : "Buka menu navigasi"}
-        className="inline-flex size-11 items-center justify-center rounded-xl text-foreground transition-colors duration-200 hover:bg-slate-900/5 active:bg-slate-900/10 lg:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-xl text-white transition-colors duration-200 hover:bg-white/10 active:bg-white/20 lg:hidden"
       >
         {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
       </button>
@@ -54,7 +54,7 @@ export function NavLinks() {
       <div
         id="menu-mobile"
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-slate-900/10 bg-white/95 shadow-lg backdrop-blur-xl lg:hidden"
+        className="absolute inset-x-0 top-full border-b border-white/10 bg-[#111844]/95 shadow-lg backdrop-blur-2xl lg:hidden"
       >
         <ul className="mx-auto grid max-w-6xl gap-1 px-4 py-3">
           {navLinks.map((l) => {
@@ -67,8 +67,8 @@ export function NavLinks() {
                   aria-current={active ? "page" : undefined}
                   className={`flex min-h-11 items-center rounded-xl px-4 text-base font-medium transition-colors duration-200 ${
                     active
-                      ? "bg-primary-soft text-primary-dark"
-                      : "text-foreground hover:bg-slate-900/5"
+                      ? "bg-white/20 text-white"
+                      : "text-slate-200 hover:bg-white/10"
                   }`}
                 >
                   {l.label}
